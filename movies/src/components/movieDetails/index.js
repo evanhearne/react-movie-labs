@@ -22,6 +22,17 @@ const chip = { margin: 0.5 };
 const MovieDetails = ( props) => {
   const movie = props.movie
 
+  var countries = "";
+
+  for (var i = 0; i < movie.production_countries.length - 1; i++) {
+    countries += movie.production_countries[i]["name"] + ", ";
+  }
+
+  if (movie.production_countries.length > 0) {
+    countries += movie.production_countries[movie.production_countries.length - 1]["name"] + ".";
+  }
+
+
   return (
     <>
       <Typography variant="h5" component="h3">
@@ -56,6 +67,14 @@ const MovieDetails = ( props) => {
           label={`${movie.vote_average} (${movie.vote_count}`}
         />
         <Chip label={`Released: ${movie.release_date}`} />
+      </Paper>
+      <Paper component="ul" sx={{...root}}>
+        <Chip
+          label="Production Countries" color="primary"
+         />
+         <Chip
+          label={`${countries}`} 
+         />
       </Paper>
       <Fab
         color="secondary"
