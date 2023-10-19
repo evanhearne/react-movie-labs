@@ -20,19 +20,8 @@ const root = {
 const chip = { margin: 0.5 };
 
 const MovieDetails = ( props) => {
-  const movie = props.movie
-
-  var countries = "";
-
-  for (var i = 0; i < movie.production_countries.length - 1; i++) {
-    countries += movie.production_countries[i]["name"] + ", ";
-  }
-
-  if (movie.production_countries.length > 0) {
-    countries += movie.production_countries[movie.production_countries.length - 1]["name"] + ".";
-  }
-
-
+  const movie = props.movie;
+  
   return (
     <>
       <Typography variant="h5" component="h3">
@@ -69,12 +58,16 @@ const MovieDetails = ( props) => {
         <Chip label={`Released: ${movie.release_date}`} />
       </Paper>
       <Paper component="ul" sx={{...root}}>
+        <li>
         <Chip
-          label="Production Countries" color="primary"
+          label="Production Countries" color="primary" sx={{...chip}}
          />
-         <Chip
-          label={`${countries}`} 
-         />
+        </li>
+         {movie.production_countries.map((c) => (
+          <li key={c.name}>
+            <Chip label={c.name} sx={{...chip}} />
+          </li>
+        ))}
       </Paper>
       <Fab
         color="secondary"
