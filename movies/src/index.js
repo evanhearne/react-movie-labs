@@ -30,7 +30,7 @@ const App = () => {
         <MoviesContextProvider>
           <Routes>
             <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
-            {/* <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} /> */}
+            <Route path="/movies/upcoming" element={<DiscoverPage />} />
             <Route path="/reviews/:id" element={ <MovieReviewPage /> } />
             <Route path="/reviews/form" element={ <AddMovieReviewPage /> } />
             <Route path="/movies/:id" element={<MoviePage />} />
