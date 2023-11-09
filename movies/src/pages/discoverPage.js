@@ -3,7 +3,7 @@ import { getMovies } from "../api/tmdb-api-upcoming";
 import PageTemplate from '../components/templateMovieListPage'
 import { useQuery } from 'react-query';
 import Spinner from '../components/spinner';
-import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
+import AddToMustWatchIcon from "../components/cardIcons/addToMustWatch";
 
 const DiscoverPage = (props) => {
 
@@ -28,7 +28,7 @@ const DiscoverPage = (props) => {
       title='Discover Upcoming Movies'
       movies={movies}
       action={(movie) => {
-        return <PlaylistAddIcon color="primary" movie={movie} />
+        return <AddToMustWatchIcon color="primary" movie={movie} />
       }}
     />
   );

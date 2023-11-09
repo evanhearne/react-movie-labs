@@ -7,9 +7,9 @@ import CardHeader from "@mui/material/CardHeader";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
 import CalendarIcon from "@mui/icons-material/CalendarTodayTwoTone";
 import StarRateIcon from "@mui/icons-material/StarRate";
-import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Grid";
 import Avatar from '@mui/material/Avatar';
 import img from '../../images/film-poster-placeholder.png'
@@ -18,6 +18,7 @@ import { MoviesContext } from "../../contexts/moviesContext";
 
 export default function MovieCard({ movie, action }) {
 const { favorites, addToFavorites } = useContext(MoviesContext);
+const { mustWatch, addToMustWatch } = useContext(MoviesContext);
 
   if (favorites.find((id) => id === movie.id)) {
     movie.favorite = true;
@@ -25,18 +26,42 @@ const { favorites, addToFavorites } = useContext(MoviesContext);
     movie.favorite = false
   }
 
+  if (mustWatch.find((id) => id === movie.id)) {
+    movie.mustWatch = true;
+  } else {
+    movie.mustWatch = false
+  }
+
   const handleAddToFavorite = (e) => {
     e.preventDefault();
     addToFavorites(movie);
+  };
+
+  const handleAddToMustWatch = (e) => {
+    e.preventDefault();
+    addToMustWatch(movie);
   };
 
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader
         avatar={
-          movie.favorite ? (
+          (movie.favorite && movie.mustWatch) ? (
+            <>
+              <Avatar sx={{ backgroundColor: 'red' }}>
+                <FavoriteIcon />
+              </Avatar>
+              <Avatar sx={{ backgroundColor: 'red' }}>
+                <PlaylistAddCheckIcon />
+              </Avatar>
+            </>
+          ) : movie.favorite ? (
             <Avatar sx={{ backgroundColor: 'red' }}>
               <FavoriteIcon />
+            </Avatar>
+          ) : movie.mustWatch ? (
+            <Avatar sx={{ backgroundColor: 'red' }}>
+              <PlaylistAddCheckIcon />
             </Avatar>
           ) : null
         }
