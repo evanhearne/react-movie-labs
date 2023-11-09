@@ -45,6 +45,7 @@ const { mustWatch, addToMustWatch } = useContext(MoviesContext);
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader
+      // Added the additional part that I am not required to tackle from Week 7 Lab Exercise - tackled it anyways :D 
         avatar={
           (movie.favorite && movie.mustWatch) ? (
             <>
